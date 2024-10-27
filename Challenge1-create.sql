@@ -11,13 +11,13 @@ USE P102_01_challange1_nba;
 
 DROP TABLE IF EXISTS People;
 CREATE TABLE IF NOT EXISTS People (
-    ID INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ID INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     brithdate DATE
 );
 
 DROP TABLE IF EXISTS Team_staff;
 CREATE TABLE IF NOT EXISTS Team_staff (
-    team_staff_ID INT(10) UNSIGNED NOT NULL PRIMARY KEY,
+    team_staff_ID INT(4) NOT NULL PRIMARY KEY,
     firstname VARCHAR(50),
     surname VARCHAR(50),
     nationality VARCHAR(50),
@@ -26,23 +26,23 @@ CREATE TABLE IF NOT EXISTS Team_staff (
 
 DROP TABLE IF EXISTS Players;
 CREATE TABLE IF NOT EXISTS Players (
-    player_ID INT(10) UNSIGNED NOT NULL PRIMARY KEY,
-    pro_year SMALLINT(4) UNSIGNED NOT NULL,
+    player_ID INT(4) NOT NULL PRIMARY KEY,
+    pro_year INT(4) NOT NULL,
     university VARCHAR(50),  -- ASSUMPTION: a player that is not drafted can not come from a university
     national_team VARCHAR(50)
 );
 
 DROP TABLE IF EXISTS Head_coaches;
 CREATE TABLE IF NOT EXISTS Head_coaches(
-    h_coach_ID INT(10) UNSIGNED NOT NULL PRIMARY KEY,
+    h_coach_ID INT(4) NOT NULL PRIMARY KEY,
     salary FLOAT(10,2) NOT NULL -- ASSUMPTION: we need to know the salary of a player to sign him/her
 );
 
 DROP TABLE IF EXISTS Assistant_coaches;
 CREATE TABLE IF NOT EXISTS Assistant_coaches (
-    a_coach_ID INT(10) UNSIGNED NOT NULL PRIMARY KEY,
-    specialty ENUM('Unspecified','Game Strategy and Tactics','Player Skills Development','Communication Skills','Recruitment','Community and Media Engagement','Health and Conditioning') DEFAULT 'Unspecified',
-    boss INT(10) UNSIGNED,
+    a_coach_ID INT(4) NOT NULL PRIMARY KEY,
+    specialty VARCHAR(50) DEFAULT 'Unspecified',
+    boss INT(4),
     franchise_name VARCHAR(50) NOT NULL
 );
 
