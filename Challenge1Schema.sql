@@ -18,7 +18,25 @@ CREATE TABLE Team_staff (
     firname VARCHAR(50),
     surname VARCHAR(50),
     nationality VARCHAR(50),    -- TODO
-    gender BOOLEAN  -- male=0, female=1
+    gender BOOLEAN,  -- male=0, female=1
+    FOREIGN KEY (team_staff_ID) REFERENCES People (ID)
+);
+
+DROP TABLE IF EXISTS Players;
+CREATE TABLE Players (
+    player_ID INT(4) NOT NULL PRIMARY KEY,
+    pro_year INT(4),
+    university VARCHAR(50), -- TO DO
+    national_team VARCHAR(50),
+    FOREIGN KEY (player_ID) REFERENCES Team_staff (team_staff_ID)
+);
+
+DROP TABLE IF EXISTS Head_coaches;
+CREATE TABLE Head_coaches(
+    h_coach_ID INT(4) NOT NULL PRIMARY KEY,
+    win_rate FLOAT(10,10),
+    salary FLOAT(10,10),
+    FOREIGN KEY (h_coach_ID) REFERENCES Team_staff (team_staff_ID)
 );
 
 DROP TABLE IF EXISTS Assistant_coaches;
@@ -26,7 +44,8 @@ CREATE TABLE Assistant_coaches (
     a_coach_ID INT(4) NOT NULL PRIMARY KEY,
     specialty VARCHAR(50),  -- TODO
     boss INT(4),
-    franchise_name VARCHAR(50)
+    franchise_name VARCHAR(50),
+    FOREIGN KEY (a_coach_ID) REFERENCES Team_staff (team_staff_ID)
 );
 
 DROP TABLE IF EXISTS Workers;
@@ -34,56 +53,45 @@ CREATE TABLE Workers (
     worker_ID INT(4) NOT NULL PRIMARY KEY,
     city VARCHAR(50),
     bank_account INT(8) NOT NULL, -- ASSUMPTION
-    has_full_time_contract BOOLEAN
+    has_full_time_contract BOOLEAN,
+    FOREIGN KEY (worker_ID) REFERENCES People (ID)
 );
 
 DROP TABLE IF EXISTS Mascots;
 CREATE TABLE Mascots (
     mascot_ID INT(4) NOT NULL PRIMARY KEY,
-    animal VARCHAR(50)
+    animal VARCHAR(50),
+    FOREIGN KEY (mascot_ID) REFERENCES Workers (worker_ID)
 );
 
 DROP TABLE IF EXISTS Bartenders;
 CREATE TABLE Bartenders (
     bartender_ID INT(4) NOT NULL PRIMARY KEY,
-    drunk_record BOOLEAN
+    drunk_record BOOLEAN,
+    FOREIGN KEY (bartender_ID) REFERENCES Workers (worker_ID)
 );
 
 DROP TABLE IF EXISTS Cleaners;
 CREATE TABLE Cleaners (
     cleaner_ID INT(4) NOT NULL PRIMARY KEY,
-    speed FLOAT(10,10)
+    speed FLOAT(10,10),
+    FOREIGN KEY (cleaner_ID) REFERENCES Workers (worker_ID)
 );
 
 DROP TABLE IF EXISTS Ticket_sellers;
 CREATE TABLE Ticket_sellers (
     seller_ID INT(4) NOT NULL PRIMARY KEY,
-    gambling BOOLEAN
+    gambling BOOLEAN,
+    FOREIGN KEY (seller_ID) REFERENCES Workers (worker_ID)
 );
 
 DROP TABLE IF EXISTS Security_guards;
 CREATE TABLE Scurity_guards (
     security_ID INT(4) NOT NULL PRIMARY KEY,
     gun_license BOOLEAN,
-    arena_city VARCHAR(50)  -- TODO
+    arena_city VARCHAR(50),  -- TODO
+    FOREIGN KEY (security_ID) REFERENCES Workers (worker_ID)
 );
-
-
-DROP TABLE IF EXISTS Players;
-CREATE TABLE Players (
-    player_ID INT(4) NOT NULL PRIMARY KEY,
-    pro_year INT(4),
-    university VARCHAR(50), -- TO DO
-    national_team VARCHAR(50)
-);
-
-DROP TABLE IF EXISTS Head_coaches;
-CREATE TABLE Head_coaches(
-    h_coach_ID INT(4) NOT NULL PRIMARY KEY,
-    win_rate FLOAT(10,10),
-    salary FLOAT(10,10)
-);
-
 
 
 -- GREEN **********************************************
